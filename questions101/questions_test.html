@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div id="newContent1">
+    <div class="container text-center">
+        <div class="row d-flex align-items-center justify-content-center m-auto" style="width: 40rem;">
+            {% for i in "1234" %}
+            <div class="col-6 mb-3">
+                <div class="card p-2">
+                    <a href="" class="tamang" data-index="{{ forloop.counter0 }}">
+                        <button>Ayo</button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% for i in "234" %}
+<div id="newContent{{i}}" style="display: none;">
+  <div class="container text-center">
+    <div class="row d-flex align-items-center justify-content-center m-auto" style="width: 40rem;">
+      ayo{{i}}
+        {% for i in "1234" %}
+        <div class="col-6 mb-3">
+            <div class="card p-2">
+                <a href="" class="tamang" data-index="{{ forloop.counter0 }}">
+                    <button>Ayo</button>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+<!-- 
+<div id="newContent3" style="display: none;">
+  <div class="container text-center">
+    <div class="row d-flex align-items-center justify-content-center m-auto" style="width: 40rem;">
+        {% for i in "1234" %}
+        ayo222
+        <div class="col-6 mb-3">
+            <div class="card p-2">
+                <a href="" class="tamang" data-index="{{ forloop.counter0 }}">
+                    <button>Ayo</button>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+ -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const correctAnswerIndices = [1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1];
+    const answerLinks = document.querySelectorAll('.tamang');
+    
+    let currentContentIndex = 1; // Initialize with the first content
+
+    answerLinks.forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        const clickedIndex = parseInt(this.getAttribute('data-index'), 10);
+
+        if (correctAnswerIndices[clickedIndex - 1] === clickedIndex) {
+          console.log('Correct answer!');
+        } else {
+          console.log('Incorrect answer.');
+        }
+
+        // Hide the current content
+        const currentContent = document.getElementById(`newContent${currentContentIndex}`);
+        if (currentContent) {
+          currentContent.style.display = 'none';
+        }
+
+        // Update the current content index to the next one or reset to 1
+        currentContentIndex = (currentContentIndex % correctAnswerIndices.length) + 1;
+
+        // Show the new content
+        const newContent = document.getElementById(`newContent${currentContentIndex}`);
+        if (newContent) {
+          newContent.style.display = 'block';
+        }
+      });
+    });
+  });
+</script>
+
+
+  
+
+{% endblock %}
