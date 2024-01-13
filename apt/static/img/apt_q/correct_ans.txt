@@ -1,8 +1,0 @@
-q1-r2
-q2-r2
-q3-r1
-q4-r4
-q5-r4
-q6-r2
-q7-r2 - false
-q8-r - CarE
